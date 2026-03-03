@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iRomance – Age Guide</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>iRomance – Age Appropriateness Guide</h1>
+    <p class="subtitle">min = age/2 + 7, max = 2×(age − 7)</p>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form id="age-form">
+        {% csrf_token %}
+        <label class="field-inline">
+            Your age
+            <input id="user-age" type="number" name="user_age" min="18" required value="{{ user_age|default:'' }}">
+        </label>
+
+        <label class="field-inline">
+            Partner's age (optional)
+            <input id="partner-age" type="number" name="partner_age" min="18" value="{{ partner_age|default:'' }}">
+        </label>
+
+        <button id="calculate-button" type="submit">Calculate</button>
+    </form>
+
+    <div id="results" class="hidden"></div>
+</div>
+<div id="error" class="error-message hidden"></div>
+</body>
+<script src="/static/js/app.js"></script>
+</html>
